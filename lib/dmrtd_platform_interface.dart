@@ -1,5 +1,4 @@
 import 'package:dmrtd_plugin/models/document..dart';
-import 'package:dmrtd_plugin/result.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'dmrtd_method_channel.dart';
@@ -25,5 +24,5 @@ abstract class DmrtdPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<Document> read(String mrzData, Function(String) onStatusChange);
+  Future<Document> read(String passportNumber, String expirationDate, String birthDate, Function(String) onStatusChange);
 }

@@ -229,7 +229,7 @@ class DocumentReadTask implements Callable<ReadResult> {
                     DisplayedImageInfo displayedImageInfo = signatureImageInfos.iterator().next();
                     Image image = ImageUtil.getImage(context, displayedImageInfo);
                    // documentDetails.setPortraitImage(image.getBitmapImage());
-                    documentDetails.setPortraitImageBase64(image.getBase64Image());
+                    documentDetails.setSignatureBase64(image.getBase64Image());
                 }
 
             } catch (Exception e) {

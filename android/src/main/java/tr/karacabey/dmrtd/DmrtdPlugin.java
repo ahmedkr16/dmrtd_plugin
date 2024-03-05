@@ -1,6 +1,7 @@
 package tr.karacabey.dmrtd;
 
-import static android.nfc.NfcAdapter.getDefaultAdapter;
+import
+        static android.nfc.NfcAdapter.getDefaultAdapter;
 
 import android.app.Activity;
 import android.nfc.NfcAdapter;
@@ -69,14 +70,24 @@ public class DmrtdPlugin implements FlutterPlugin, MethodCallHandler, ActivityAw
                 readDocument=null;
                 isOnAction=false;
             }
-            NfcAdapter nfcAdapter = getDefaultAdapter(activity);
-            String mrzData = (String) call.arguments;
+
+            String passportNumber = call.argument("passportNumber");
+            String expirationDate = call.argument("expirationDate");
+            String birthDate = call.argument("birthDate");
+
+           NfcAdapter nfcAdapter = getDefaultAdapter(activity);
+           /* String mrzData = (String) call.arguments;
             mrzData = mrzData.replaceAll("-", "");
             MRZInfo mrzInfo = new MRZInfo(mrzData);
 
             String passportNumber = mrzInfo.getDocumentNumber();
             String expirationDate = mrzInfo.getDateOfExpiry();
-            String birthDate = mrzInfo.getDateOfBirth();
+            String birthDate = mrzInfo.getDateOfBirth();*/
+
+            if (passportNumber == null || expirationDate == null || birthDate == null) {
+                result.error("400", "Missing parameters for document reading", null);
+                return;
+            }
 
             BACKeySpec bacKey = new BACKey(passportNumber, birthDate, expirationDate);
             //result.success(mrzInfo.getDocumentNumber());

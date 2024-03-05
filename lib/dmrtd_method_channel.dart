@@ -25,7 +25,7 @@ class MethodChannelDmrtd extends DmrtdPlatform {
   }
 
   @override
-  Future<Document> read(String mrzData, Function(String) onStatusChange) async {
+  Future<Document> read(String passportNumber, String expirationDate, String birthDate, Function(String) onStatusChange) async {
     if (isOnWork) DocumentReadException(code: "already-on-read", message: "");
 
     methodChannel.setMethodCallHandler((MethodCall call) async {
@@ -35,7 +35,11 @@ class MethodChannelDmrtd extends DmrtdPlatform {
     });
 
     try {
-      final result = await methodChannel.invokeMethod<dynamic>('read', mrzData);
+      final result = await methodChannel.invokeMethod<dynamic>('read', {
+        'passportNumber': passportNumber,
+        'expirationDate': expirationDate,
+        'birthDate': birthDate
+      });
 
       if (result != null) {
         final error = result["error"];
